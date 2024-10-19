@@ -1,0 +1,1 @@
+export const REGISTER_ENDPOINT = "http://localhost:5001/register";
