@@ -43,7 +43,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 duration: 4000,
                 isClosable: true,
             });
-            onClose(); // Menutup modal setelah login berhasil
+            onClose();
         } catch (error) {
             if (error instanceof Error) {
                 toast({
@@ -85,7 +85,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                             placeholder="Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            size={{ base: 'sm', md: 'md' }} // Responsif
+                            size={{ base: 'sm', md: 'md' }} 
                         />
                     </FormControl>
 

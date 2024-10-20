@@ -8,12 +8,9 @@ import os
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "mysql+pymysql://root:@localhost/elearning")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# CORS configuration
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 db.init_app(app)
-
 app.register_blueprint(register_bp)
 app.register_blueprint(course_bp)
 

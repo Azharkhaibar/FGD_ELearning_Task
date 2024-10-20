@@ -21,7 +21,6 @@ def get_participant_by_id(id):
 def post_participant():
     data = request.get_json()
 
-    # Basic validation
     if not data.get('name') or not data.get('email') or not data.get('phone_number'):
         return jsonify({"message": "All fields are required."}), 400
 
@@ -37,10 +36,10 @@ def post_participant():
         return jsonify(new_participant.course_participate_json()), 201
     except IntegrityError:
         db.session.rollback()
-        return jsonify({"message": "This email is already registered."}), 409  # Conflict status
+        return jsonify({"message": "This email is already registered."}), 409  
     except Exception as e:
         db.session.rollback()
-        return jsonify({"message": str(e)}), 500  # Internal server error
+        return jsonify({"message": str(e)}), 500  
 
 @course_bp.route('/participants/<int:id>', methods=['DELETE'])
 def delete_participant(id):
