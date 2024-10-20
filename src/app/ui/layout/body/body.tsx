@@ -57,9 +57,9 @@ export default function Body() {
                                 bg="white"
                                 borderRadius="lg"
                                 boxShadow="md"
-                                _hover={{ boxShadow: "lg", transition: "0.2s" }} // Efek hover
-                                mx={2} // Margin horizontal untuk ruang antar slide
-                                mb={4} // Margin bawah untuk jarak antar slider
+                                _hover={{ boxShadow: "lg", transition: "0.2s" }} 
+                                mx={2} // Margin horizontal untuk 
+                                mb={4}
                             >
                                 <VStack spacing={4}>
                                     <Box p="18px" bg="gray.200" borderRadius="full" mx="auto">

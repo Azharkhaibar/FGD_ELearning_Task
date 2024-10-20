@@ -23,7 +23,7 @@ const SignUp: React.FC = () => {
     const [passwordInput, setPasswordInput] = useState('');
     const [confirmPasswordInput, setConfirmPasswordInput] = useState('');
 
-    const handleSignUpProcess = async () => {
+    const handleSignUpProcessAccountt = async () => {
         if (!firstNameInput || !lastNameInput || !usernameInput || !emailInput || !passwordInput || !confirmPasswordInput) {
             toastNotification({
                 title: "Missing Fields.",
@@ -89,8 +89,8 @@ const SignUp: React.FC = () => {
                         <Image
                             src={RegisterImage.src}
                             alt="Register Illustration"
-                            layout="fill" // Use 'fill' to make it cover the entire box
-                            objectFit="cover" // This ensures the image covers the box without distortion
+                            layout="fill" 
+                            objectFit="cover"
                         />
                         <Box pos="absolute" bottom="25px" left="30%">
                             <Text fontWeight="600">
@@ -190,7 +190,7 @@ const SignUp: React.FC = () => {
                             width={{ base: "100%", md: "150px" }}
                             mt={4}
                             p={6}
-                            onClick={handleSignUpProcess}
+                            onClick={handleSignUpProcessAccountt}
                         >
                             Sign Up
                         </Button>

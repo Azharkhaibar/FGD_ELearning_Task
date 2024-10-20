@@ -14,7 +14,7 @@ const DataFact: React.FC = () => {
             <Box w={{ base: "100%", md: "40%" }} h="100%" p={4} mx="auto" mt={{ base: "4", md: "2%" }}>
                 <Text fontWeight="bold" color="white">Funfact</Text>
                 <Heading fontSize={{ base: "30px", md: "50px" }} fontWeight="600" color="white" mb={4}>
-                    Zilom Mission is to<br /> Polish your skill
+                    Elearning Mission is to<br /> Polish your skill
                 </Heading>
                 <Text color="white" fontSize={{ base: "sm", md: "md" }}>
                     There are many variations of passages of lore ipsum available but the majority have suffered.
@@ -39,15 +39,15 @@ const Counter: React.FC<{ icon: any; totalCount: number; factDescription: string
 
     useEffect(() => {
         let isComponentActive = true;
-        let startValue = 0;
-        const endValue = totalCount;
-        const totalDuration = 2000;
-        const timePerIncrement = Math.floor(totalDuration / endValue);
+        let startValueNumber = 0;
+        const endValueNumber = totalCount;
+        const totalDurationAnimate = 2000;
+        const timePerIncrement = Math.floor(totalDurationAnimate / endValueNumber);
 
         const countInterval = setInterval(() => {
-            if (isComponentActive && startValue < endValue) {
-                startValue++;
-                setCurrentNumber(startValue);
+            if (isComponentActive && startValueNumber < endValueNumber) {
+                startValueNumber++;
+                setCurrentNumber(startValueNumber);
             } else {
                 clearInterval(countInterval);
             }
@@ -70,9 +70,9 @@ const Counter: React.FC<{ icon: any; totalCount: number; factDescription: string
             mx="auto"
             color="black"
             boxShadow="sm"
-            width={{ base: "100%", md: "calc(33% - 1rem)" }} // Responsif
-            maxWidth={{ base: "100%", md: "calc(33% - 1rem)" }} // Responsif
-            mr={{ base: 0, md: 4 }} // Hilangkan margin di mobile
+            width={{ base: "100%", md: "calc(33% - 1rem)" }}
+            maxWidth={{ base: "100%", md: "calc(33% - 1rem)" }} 
+            mr={{ base: 0, md: 4 }} 
             justifyContent="center"
             textAlign="center"
         >

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState, useEffect } from 'react';
 import { Box, Heading, Text, VStack, Progress, Button, Link, Flex, SimpleGrid, Icon, Circle } from '@chakra-ui/react';
 import LoginModal from '../components/loginmodal';
@@ -8,7 +8,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import Navbar from '../components/navbar';
 
 const businessLessons = [
-    { id: 1, title: 'Dasar-dasar Manajemen', type: 'video', completed: false, videoUrl: 'https://www.example.com/video1', quizUrl: '/quiz/1' },
+    { id: 1, title: 'Dasar-dasar Manajemen', type: 'video', completed: false, videoUrl: '/pd3', quizUrl: '/quiz/1' },
     { id: 2, title: 'Strategi Pemasaran Digital', type: 'video', completed: false, videoUrl: 'https://www.example.com/video2', quizUrl: '/quiz/2' },
     { id: 3, title: 'Analisis Keuangan untuk Pemula', type: 'pdf', completed: false, pdfUrl: 'https://www.example.com/pdf1.pdf', quizUrl: '/quiz/3' },
     { id: 4, title: 'Pengembangan Bisnis', type: 'video', completed: false, videoUrl: 'https://www.example.com/video3', quizUrl: '/quiz/4' },
@@ -17,12 +17,13 @@ const businessLessons = [
 
 export default function Ebusiness() {
     const [progress, setProgress] = useState(0);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedInACC, setIsLoggedInACC] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [warningMessage, setWarningMessage] = useState("");
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
-            setIsLoggedIn(!!user);
+            setIsLoggedInACC(!!user);
         });
         return () => unsubscribe();
     }, []);
@@ -31,6 +32,14 @@ export default function Ebusiness() {
     const handleCloseLogin = () => setIsOpen(false);
 
     const handleCompleteLesson = (lessonId) => {
+        const currentIndexNumber = businessLessons.findIndex(lesson => lesson.id === lessonId);
+        if (currentIndexNumber > 0 && !businessLessons[currentIndexNumber - 1].completed) {
+            setWarningMessage("Selesaikan pelajaran sebelumnya terlebih dahulu.");
+            return;
+        } else {
+            setWarningMessage(""); 
+        }
+
         const updatedLessons = businessLessons.map((lesson) => {
             if (lesson.id === lessonId) {
                 lesson.completed = true;
@@ -38,19 +47,19 @@ export default function Ebusiness() {
             return lesson;
         });
 
-        const completedCount = updatedLessons.filter((lesson) => lesson.completed).length;
-        setProgress((completedCount / updatedLessons.length) * 100);
+        const completedCountNumber = updatedLessons.filter((lesson) => lesson.completed).length;
+        setProgress((completedCountNumber / updatedLessons.length) * 100);
     };
 
     return (
         <Box>
             <Navbar />
-            {isLoggedIn ? (
+            {isLoggedInACC ? (
                 <>
                     <Box
                         w="100%"
-                        h={{ base: "40vh", md: "60vh" }} // Responsive height
-                        backgroundImage={`url(${BusinessPict.src})`} // Replace with your image
+                        h={{ base: "40vh", md: "60vh" }}
+                        backgroundImage={`url(${BusinessPict.src})`}
                         backgroundSize="cover"
                         backgroundPosition="center"
                     >
@@ -60,7 +69,7 @@ export default function Ebusiness() {
                             justify="center"
                             textAlign="center"
                             color="white"
-                            p={{ base: 4, md: 8 }} // Responsive padding
+                            p={{ base: 4, md: 8 }}
                         >
                             <Box>
                                 <Heading as="h1" fontSize={{ base: "40px", md: "70px" }} mb={4}>
@@ -118,6 +127,22 @@ export default function Ebusiness() {
                             </Box>
                         ))}
                     </SimpleGrid>
+
+                    {warningMessage && (
+                        <Box
+                            bg="red.100"
+                            borderRadius="md"
+                            p={4}
+                            mt={4}
+                            border="1px solid"
+                            borderColor="red.400"
+                            color="red.800"
+                            width={{ base: "90%", md: "50%" }}
+                            mx="auto"
+                        >
+                            <Text textAlign="center">{warningMessage}</Text>
+                        </Box>
+                    )}
 
                     <Box mt={6} textAlign="center">
                         <Text fontWeight="bold" fontSize="xl">Progress Anda:</Text>

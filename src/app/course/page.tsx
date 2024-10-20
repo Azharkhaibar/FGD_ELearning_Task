@@ -14,22 +14,18 @@ import Navbar from "../components/navbar";
 import CoursePict from '../img/course.png';
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { coursesData } from '../data/coursepage';
-import Link from 'next/link'; // Import Link from next/link
+import Link from 'next/link';
 
 const CoursePage: React.FC = () => {
     const [currentPageNumber, setCurrentPageNumber] = useState(1);
     const [selectedCategoryName, setSelectedCategoryName] = useState("All");
     const totalCoursesPerPage = 9;
-
     const indexOfLastCourse = currentPageNumber * totalCoursesPerPage;
     const indexOfFirstCourse = indexOfLastCourse - totalCoursesPerPage;
-
     const filteredCoursesList = selectedCategoryName === "All"
         ? coursesData
         : coursesData.filter(course => course.category === selectedCategoryName);
-
     const currentCoursesList = filteredCoursesList.slice(indexOfFirstCourse, indexOfLastCourse);
-
     const handleNextPage = () => {
         if (currentPageNumber < Math.ceil(filteredCoursesList.length / totalCoursesPerPage)) {
             setCurrentPageNumber(currentPageNumber + 1);
@@ -76,7 +72,7 @@ const CoursePage: React.FC = () => {
                 </Box>
             </Box>
 
-            {/* Category Filter */}
+            
             <Box
                 w={{ base: "90%", md: "40%" }}
                 p="25px"
@@ -99,9 +95,9 @@ const CoursePage: React.FC = () => {
                             cursor="pointer"
                             onClick={() => {
                                 setSelectedCategoryName(category);
-                                setCurrentPageNumber(1); // Reset to first page when category changes
+                                setCurrentPageNumber(1); 
                             }}
-                            color={selectedCategoryName === category ? "purple.500" : "black"} // Highlight selected category
+                            color={selectedCategoryName === category ? "purple.500" : "black"} 
                         >
                             {category}
                         </Text>
@@ -109,11 +105,11 @@ const CoursePage: React.FC = () => {
                 </Flex>
             </Box>
 
-            {/* Course Cards */}
+
             <Box w="100%" mx="auto" mt="3%" display="flex" justifyContent="center" flexWrap="wrap" gap={{ base: "2%", md: "2%" }}>
                 {currentCoursesList.map((course) => (
                     <Box
-                        key={course.id} // Use course.id for a unique key
+                        key={course.id} 
                         w={{ base: "90%", sm: "400px" }}
                         bg="gray.100"
                         borderRadius="15px"
@@ -149,7 +145,7 @@ const CoursePage: React.FC = () => {
                             <Text fontSize="16px" color="gray.600" mb="15px">
                                 {course.description}
                             </Text>
-                            {/* Learn More Button */}
+
                             <Link href={course.href} passHref>
                                 <Button
                                     bg="purple.400"
@@ -180,7 +176,7 @@ const CoursePage: React.FC = () => {
                     variant="solid"
                     leftIcon={<FaArrowLeft />}
                     w={{ base: "100%", md: "120px" }} // Set width for button
-                    mb={{ base: 2, md: 0 }} // Margin for mobile view
+                    mb={{ base: 2, md: 0 }} 
                 >
                     Previous
                 </Button>
@@ -191,9 +187,9 @@ const CoursePage: React.FC = () => {
                     bg="purple.100"
                     borderRadius="10px"
                     p="10px 20px"
-                    w={{ base: "100%", md: "auto" }} // Full width on mobile, auto on larger screens
-                    textAlign={{ base: "center", md: "initial" }} // Center text on mobile
-                    mb={{ base: 2, md: 0 }} // Margin for mobile view
+                    w={{ base: "100%", md: "auto" }}
+                    textAlign={{ base: "center", md: "initial" }} 
+                    mb={{ base: 2, md: 0 }} 
                 >
                     <Text fontWeight="bold" color="purple.600">
                         Page {currentPageNumber} of {Math.ceil(filteredCoursesList.length / totalCoursesPerPage)}
@@ -205,8 +201,8 @@ const CoursePage: React.FC = () => {
                     colorScheme="purple"
                     variant="solid"
                     rightIcon={<FaArrowRight />}
-                    w={{ base: "100%", md: "120px" }} // Set width for button
-                    mt={{ base: 2, md: 0 }} // Margin for mobile view
+                    w={{ base: "100%", md: "120px" }} 
+                    mt={{ base: 2, md: 0 }}
                 >
                     Next
                 </Button>

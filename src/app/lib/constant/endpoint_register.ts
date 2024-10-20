@@ -1,1 +1,1 @@
-export const REGISTER_ENDPOINT = "http://localhost:5001/register";
+export const REGISTER_ENDPOINT = "http://localhost:4001/register";

@@ -29,7 +29,7 @@ const CourseDetailBusiness: React.FC = () => {
     const router = useRouter();
     const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
     const [favoriteCount, setFavoriteCount] = useState(0);
-    const [isFavorited, setIsFavorited] = useState(false);
+    const [isFavoritedCourse, setIsFavorited] = useState(false);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -40,7 +40,7 @@ const CourseDetailBusiness: React.FC = () => {
 
     const handleEnroll = () => {
         if (loggedIn) {
-            router.push("/ebussiness"); // Update the path to the relevant course
+            router.push("/ebussiness"); 
         } else {
             onOpen();
         }
@@ -48,8 +48,8 @@ const CourseDetailBusiness: React.FC = () => {
 
     const handleFavorite = () => {
         if (loggedIn) {
-            setFavoriteCount(isFavorited ? favoriteCount - 1 : favoriteCount + 1);
-            setIsFavorited(!isFavorited);
+            setFavoriteCount(isFavoritedCourse ? favoriteCount - 1 : favoriteCount + 1);
+            setIsFavorited(!isFavoritedCourse);
         } else {
             onOpen();
         }
@@ -62,8 +62,8 @@ const CourseDetailBusiness: React.FC = () => {
                 w="100%"
                 mx="auto"
                 display="flex"
-                flexDirection={{ base: "column", md: "row" }} // Stack on small screens
-                px={{ base: "5%", md: "15%" }} // Responsive padding
+                flexDirection={{ base: "column", md: "row" }} 
+                px={{ base: "5%", md: "15%" }} 
                 mt="2%"
                 overflow="hidden"
             >
@@ -73,7 +73,7 @@ const CourseDetailBusiness: React.FC = () => {
                     p={6}
                     borderBottomLeftRadius={{ base: "20px", md: "0" }}
                     borderTopLeftRadius={{ base: "20px", md: "0" }}
-                    mb={{ base: "4", md: "0" }} // Margin bottom for mobile
+                    mb={{ base: "4", md: "0" }} 
                 >
                     <Flex justifyContent="space-between" alignItems="center">
                         <Flex alignItems="center">
@@ -85,7 +85,7 @@ const CourseDetailBusiness: React.FC = () => {
                                 leftIcon={<Icon as={FaRegBookmark} />}
                                 variant="ghost"
                                 mr={4}
-                                color={isFavorited ? "red.500" : "black"}
+                                color={isFavoritedCourse ? "red.500" : "black"}
                                 onClick={handleFavorite}
                             >
                                 Favorite
@@ -117,7 +117,7 @@ const CourseDetailBusiness: React.FC = () => {
                             src={BusinessPict.src}
                             alt="Business Course Image"
                             w="100%"
-                            h={{ base: "300px", md: "450px" }} // Responsive height
+                            h={{ base: "300px", md: "450px" }}
                             objectFit="cover"
                             borderRadius="md"
                         />

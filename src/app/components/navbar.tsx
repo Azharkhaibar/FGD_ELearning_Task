@@ -52,7 +52,7 @@ const Navbar: React.FC<{ favoriteCount: number }> = ({ favoriteCount }) => {
                     <Image
                         boxSize="40px"
                         objectFit="cover"
-                        src="/path-to-your-logo.png" // Change to your logo path
+                        src="/path-to-your-logo.png"
                         alt="Logo"
                     />
                     <Heading size="md" ml="2">
@@ -130,8 +130,6 @@ const Navbar: React.FC<{ favoriteCount: number }> = ({ favoriteCount }) => {
                         </Box>
                     )}
                 </Box>
-
-                {/* Dropdown Menu for Mobile */}
                 <Box display={{ base: "block", md: "none" }}>
                     <Menu>
                         <MenuButton as={IconButton} aria-label="Options" icon={<FaBars />} variant="outline" />

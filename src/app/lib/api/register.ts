@@ -1,11 +1,7 @@
 import axios from "axios";
-
-// Definisikan interface untuk data respons
 interface RegisterResponse {
-    message: string; // atau atribut lain yang Anda harapkan
+    message: string; 
 }
-
-// Ubah fungsi SendRegisterData dengan tipe yang lebih spesifik
 export const SendRegisterData = async (
     firstname: string,
     lastname: string,
@@ -19,11 +15,10 @@ export const SendRegisterData = async (
             email,
             password,
         });
-
-        return response.data; // Mengembalikan data dari server
+        return response.data; 
     } catch (error) {
         console.error("Error sending registration data:", error);
-        throw error; // Melempar kesalahan agar bisa ditangani di tempat lain
+        throw error; 
     }
 };
 

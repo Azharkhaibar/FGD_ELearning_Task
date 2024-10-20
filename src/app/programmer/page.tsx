@@ -34,8 +34,8 @@ const CourseDetails: React.FC = () => {
         return savedFavorites ? JSON.parse(savedFavorites) : [];
     });
 
-    const courseId = "your_course_id"; // Replace with your actual course ID
-    const isFavorited = favorites.includes(courseId); // Check if the course is favorited
+    const courseId = "your_course_id"; 
+    const isFavoritedCourse = favorites.includes(courseId); 
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -45,18 +45,18 @@ const CourseDetails: React.FC = () => {
         return () => unsubscribe();
     }, []);
 
-    const handleEnroll = () => {
+    const handleEnrollCourse = () => {
         if (loggedIn) {
             router.push("/eprogrammer");
         } else {
-            onOpen(); // Show login modal if not logged in
+            onOpen();
         }
     };
 
     const handleToggleFavorite = () => {
         setFavorites((prevFavorites) => {
-            const isFavorited = prevFavorites.includes(courseId);
-            const updatedFavorites = isFavorited
+            const isFavoritedCourse = prevFavorites.includes(courseId);
+            const updatedFavorites = isFavoritedCourse
                 ? prevFavorites.filter(id => id !== courseId)
                 : [...prevFavorites, courseId];
 
@@ -85,7 +85,7 @@ const CourseDetails: React.FC = () => {
                     p={6}
                     borderBottomLeftRadius={{ base: "20px", md: "0" }}
                     borderTopLeftRadius={{ base: "20px", md: "0" }}
-                    mb={{ base: "4", md: "0" }} // margin bottom for mobile
+                    mb={{ base: "4", md: "0" }} 
                 >
                     <Flex justifyContent="space-between" alignItems="center">
                         <Flex alignItems="center">
@@ -97,7 +97,7 @@ const CourseDetails: React.FC = () => {
                                 leftIcon={<Icon as={FaRegBookmark} />}
                                 variant="ghost"
                                 mr={4}
-                                color={isFavorited ? "red.500" : "black"}
+                                color={isFavoritedCourse ? "red.500" : "black"}
                                 onClick={handleToggleFavorite}
                             >
                                 Favorite
@@ -129,7 +129,7 @@ const CourseDetails: React.FC = () => {
                             src={ProgrammerPict.src}
                             alt="Programmer Image"
                             w="100%"
-                            h={{ base: "300px", md: "450px" }} // responsive height
+                            h={{ base: "300px", md: "450px" }} 
                             objectFit="cover"
                             borderRadius="md"
                         />
@@ -161,7 +161,7 @@ const CourseDetails: React.FC = () => {
                             _hover={{ bg: "purple.400" }}
                             color="white"
                             mb={4}
-                            onClick={handleEnroll}
+                            onClick={handleEnrollCourse}
                         >
                             Enroll Now
                         </Text>

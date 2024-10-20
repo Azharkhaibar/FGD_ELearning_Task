@@ -8,42 +8,40 @@ import ProgrammerPict from '../img/programmer.png';
 import Navbar from '../components/navbar';
 import { FaCheckCircle } from 'react-icons/fa';
 
-const lessons = [
-    { id: 1, title: 'Pengantar Pemrograman', type: 'video', completed: false, videoUrl: 'https://www.example.com/video1', pdfUrl: 'https://www.example.com/pdf1.pdf', quizUrl: '/quiz/1' },
-    { id: 2, title: 'Dasar-dasar JavaScript', type: 'video', completed: false, videoUrl: 'https://www.example.com/video2', pdfUrl: 'https://www.example.com/pdf2.pdf', quizUrl: '/quiz/2' },
-    { id: 3, title: 'Pemrograman Berorientasi Objek', type: 'pdf', completed: false, pdfUrl: 'https://www.example.com/pdf3.pdf', quizUrl: '/quiz/3' },
+const lessonList = [
+    { id: 1, title: 'Pengantar Pemrograman', type: 'video', completed: false, videoUrl: '/pd1', pdfUrl: 'https://www.example.com/pdf1.pdf', quizUrl: '/quiz1' },
+    { id: 2, title: 'Dasar-dasar JavaScript', type: 'video', completed: false, videoUrl: '/pd2', pdfUrl: 'https://www.example.com/pdf2.pdf', quizUrl: '/quiz2' },
+    { id: 3, title: 'Pemrograman Berorientasi Objek', type: 'pdf', completed: false, pdfUrl: 'https://pustaka.ut.ac.id/lib/wp-content/uploads/pdfmk/MSIM4301-M1A.pdf', quizUrl: '/quiz/3' },
     { id: 4, title: 'Asynchronous JavaScript', type: 'video', completed: false, videoUrl: 'https://www.example.com/video4', pdfUrl: 'https://www.example.com/pdf4.pdf', quizUrl: '/quiz/4' },
     { id: 5, title: 'Proyek Akhir', type: 'pdf', completed: false, pdfUrl: 'https://www.example.com/pdf5.pdf', quizUrl: '/quiz/5' },
 ];
 
 export default function Eprogrammer() {
-    const [progress, setProgress] = useState(0);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [warningMessage, setWarningMessage] = useState("");
+    const [prog, setProg] = useState(0);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [warnMsg, setWarnMsg] = useState("");
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
-            setIsLoggedIn(!!user);
+            setLoggedIn(!!user);
         });
         return () => unsubscribe();
     }, []);
 
-    const handleOpenLogin = () => setIsOpen(true);
-    const handleCloseLogin = () => setIsOpen(false);
+    const handleLoginOpen = () => setModalOpen(true);
+    const handleLoginClose = () => setModalOpen(false);
 
-    const handleCompleteLesson = (lessonId) => {
-        const currentIndex = lessons.findIndex(lesson => lesson.id === lessonId);
-
-        // Check if the previous lesson is completed
-        if (currentIndex > 0 && !lessons[currentIndex - 1].completed) {
-            setWarningMessage("Selesaikan pelajaran sebelumnya terlebih dahulu.");
+    const handleLessonComplete = (lessonId) => {
+        const currentIndex = lessonList.findIndex(lesson => lesson.id === lessonId);
+        if (currentIndex > 0 && !lessonList[currentIndex - 1].completed) {
+            setWarnMsg("Selesaikan pelajaran sebelumnya terlebih dahulu.");
             return;
         } else {
-            setWarningMessage("");
+            setWarnMsg("");
         }
 
-        const updatedLessons = lessons.map((lesson) => {
+        const updatedLessons = lessonList.map((lesson) => {
             if (lesson.id === lessonId) {
                 lesson.completed = true;
             }
@@ -51,17 +49,17 @@ export default function Eprogrammer() {
         });
 
         const completedCount = updatedLessons.filter((lesson) => lesson.completed).length;
-        setProgress((completedCount / updatedLessons.length) * 100);
+        setProg((completedCount / updatedLessons.length) * 100);
     };
 
     return (
         <Box>
             <Navbar />
-            {isLoggedIn ? (
+            {loggedIn ? (
                 <>
                     <Box
                         w="100%"
-                        h={{ base: "40vh", md: "60vh" }} // Responsive height
+                        h={{ base: "40vh", md: "60vh" }}
                         backgroundImage={`url(${ProgrammerPict.src})`}
                         backgroundSize="cover"
                         backgroundPosition="center"
@@ -72,7 +70,7 @@ export default function Eprogrammer() {
                             justify="center"
                             textAlign="center"
                             color="white"
-                            p={{ base: 4, md: 8 }} // Responsive padding
+                            p={{ base: 4, md: 8 }}
                         >
                             <Box>
                                 <Heading as="h1" fontSize={{ base: "40px", md: "70px" }} mb={4}>Kursus Pemrograman</Heading>
@@ -88,7 +86,7 @@ export default function Eprogrammer() {
                     </Heading>
 
                     <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} p={5}>
-                        {lessons.map((lesson, index) => (
+                        {lessonList.map((lesson, index) => (
                             <Box
                                 key={lesson.id}
                                 borderWidth={1}
@@ -98,7 +96,7 @@ export default function Eprogrammer() {
                                 boxShadow="md"
                                 transition="0.3s"
                                 _hover={{ boxShadow: "lg", transform: "translateY(-2px)" }}
-                                opacity={lesson.completed ? 1 : 0.6} // Reduce opacity for incomplete lessons
+                                opacity={lesson.completed ? 1 : 0.6}
                             >
                                 <Text fontWeight="bold" fontSize="lg">{`${index + 1}. ${lesson.title}`}</Text>
                                 <Text color="gray.500">{lesson.type === 'video' ? 'Video' : 'Dokumen PDF'}</Text>
@@ -121,11 +119,11 @@ export default function Eprogrammer() {
 
                                 {!lesson.completed ? (
                                     <Button
-                                        onClick={() => handleCompleteLesson(lesson.id)}
+                                        onClick={() => handleLessonComplete(lesson.id)}
                                         mt={4}
                                         colorScheme="teal"
-                                        isDisabled={index > 0 && !lessons[index - 1].completed} // Disable button if previous lesson is not completed
-                                        width="full" // Full width for mobile
+                                        isDisabled={index > 0 && !lessonList[index - 1].completed}
+                                        width="full"
                                     >
                                         Tandai sebagai selesai
                                     </Button>
@@ -136,7 +134,7 @@ export default function Eprogrammer() {
                         ))}
                     </SimpleGrid>
 
-                    {warningMessage && (
+                    {warnMsg && (
                         <Box
                             bg="red.100"
                             borderRadius="md"
@@ -146,7 +144,7 @@ export default function Eprogrammer() {
                             borderColor="red.400"
                             color="red.800"
                         >
-                            <Text>{warningMessage}</Text>
+                            <Text>{warnMsg}</Text>
                         </Box>
                     )}
 
@@ -155,7 +153,7 @@ export default function Eprogrammer() {
                         <Flex align="center" justify="center" mt={2} position="relative">
                             <Box width={{ base: "90%", md: "80%" }} position="relative">
                                 <Progress
-                                    value={progress}
+                                    value={prog}
                                     size="lg"
                                     borderRadius="full"
                                     colorScheme="teal"
@@ -169,11 +167,11 @@ export default function Eprogrammer() {
                                     }}
                                 />
                                 <Circle size="60px" bg="white" boxShadow="md" position="absolute" top="-15px" left="50%" transform="translateX(-50%)">
-                                    <Text fontSize="lg" fontWeight="bold">{`${Math.round(progress)}%`}</Text>
+                                    <Text fontSize="lg" fontWeight="bold">{`${Math.round(prog)}%`}</Text>
                                 </Circle>
                             </Box>
 
-                            {progress === 100 && (
+                            {prog === 100 && (
                                 <Icon as={FaCheckCircle} color="green.500" boxSize={8} position="absolute" top="50%" left="90%" transform="translate(-50%, -50%)" />
                             )}
                         </Flex>
@@ -184,7 +182,7 @@ export default function Eprogrammer() {
                     <Text fontSize={{ base: "md", md: "lg" }} mb={4}>
                         Konten ini terkunci. Silakan login untuk mengakses kursus.
                     </Text>
-                    <Button onClick={handleOpenLogin} colorScheme="teal" size="lg" width="full">
+                    <Button onClick={handleLoginOpen} colorScheme="teal" size="lg" width="full">
                         Login
                     </Button>
                     <Text>atau</Text>
@@ -194,7 +192,7 @@ export default function Eprogrammer() {
                 </VStack>
             )}
 
-            <LoginModal isOpen={isOpen} onClose={handleCloseLogin} />
+            <LoginModal isOpen={modalOpen} onClose={handleLoginClose} />
         </Box>
     );
 }
