@@ -7,6 +7,7 @@ import auth from '../components/firebase';
 import ProgrammerPict from '../img/programmer.png';
 import Navbar from '../components/navbar';
 import { FaCheckCircle } from 'react-icons/fa';
+import Footer from '../ui/layout/footer/footer';
 
 const lessonList = [
     { id: 1, title: 'Pengantar Pemrograman', type: 'video', completed: false, videoUrl: '/pd1', pdfUrl: 'https://www.example.com/pdf1.pdf', quizUrl: '/quiz1' },
@@ -193,6 +194,7 @@ export default function Eprogrammer() {
             )}
 
             <LoginModal isOpen={modalOpen} onClose={handleLoginClose} />
+            <Footer />
         </Box>
     );
 }

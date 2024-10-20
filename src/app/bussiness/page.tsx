@@ -11,6 +11,7 @@ import {
     Image,
     useDisclosure,
 } from "@chakra-ui/react";
+import Footer from "../ui/layout/footer/footer";
 import { FaShare, FaRegBookmark } from "react-icons/fa";
 import Navbar from "../components/navbar";
 import { FaPeopleGroup } from "react-icons/fa6";
@@ -174,6 +175,7 @@ const CourseDetailBusiness: React.FC = () => {
 
             <LoginModal isOpen={isOpen} onClose={onClose} />
             <ShareModal isOpen={isShareOpen} onClose={onShareClose} pageUrl={pageUrl} />
+            <Footer />
         </Box>
     );
 };

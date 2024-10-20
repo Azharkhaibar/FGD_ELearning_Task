@@ -15,6 +15,7 @@ import CoursePict from '../img/course.png';
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { coursesData } from '../data/coursepage';
 import Link from 'next/link';
+import Footer from "../ui/layout/footer/footer";
 
 const CoursePage: React.FC = () => {
     const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -160,13 +161,11 @@ const CoursePage: React.FC = () => {
                     </Box>
                 ))}
             </Box>
-
-            {/* Pagination Controls */}
             <HStack
-                justifyContent="center" // Center the pagination controls
+                justifyContent="center" 
                 mt="30px"
-                spacing={4} // Adjust spacing to be smaller
-                flexDirection={{ base: "column", md: "row" }} // Keep it vertical on mobile, horizontal on larger screens
+                spacing={4}
+                flexDirection={{ base: "column", md: "row" }} 
                 w="full"
             >
                 <Button
@@ -175,7 +174,7 @@ const CoursePage: React.FC = () => {
                     colorScheme="purple"
                     variant="solid"
                     leftIcon={<FaArrowLeft />}
-                    w={{ base: "100%", md: "120px" }} // Set width for button
+                    w={{ base: "100%", md: "120px" }} 
                     mb={{ base: 2, md: 0 }} 
                 >
                     Previous
@@ -207,7 +206,7 @@ const CoursePage: React.FC = () => {
                     Next
                 </Button>
             </HStack>
-
+            <Footer />
         </Box>
     );
 }

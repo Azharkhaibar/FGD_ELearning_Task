@@ -19,6 +19,7 @@ import DataFact from '@/app/components/datacalculate';
 import DiscoverCourse from '@/app/components/discovercourse';
 import NextLink from 'next/link';
 import FreeCourse from '@/app/components/freecourse';
+import Footer from '../footer/footer';
 
 export default function Body() {
     const sliderSettings = {
@@ -58,7 +59,7 @@ export default function Body() {
                                 borderRadius="lg"
                                 boxShadow="md"
                                 _hover={{ boxShadow: "lg", transition: "0.2s" }} 
-                                mx={2} // Margin horizontal untuk 
+                                mx={2} 
                                 mb={4}
                             >
                                 <VStack spacing={4}>
@@ -79,6 +80,7 @@ export default function Body() {
             </Box>
             <DataFact />
             <FreeCourse />
+            <Footer />
         </Box>
     );
 }

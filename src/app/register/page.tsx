@@ -11,6 +11,7 @@ import LoginModal from "../components/loginmodal";
 import GoogleSignIn from "../components/signwithgoogle";
 import auth from "../components/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import Footer from "../ui/layout/footer/footer";
 
 const SignUp: React.FC = () => {
     const { isOpen: isOpenModal, onOpen: openModal, onClose: closeModal } = useDisclosure();
@@ -197,6 +198,7 @@ const SignUp: React.FC = () => {
                     </Box>
                 </Flex>
             </Box>
+            <Footer />
         </Box>
 
     );

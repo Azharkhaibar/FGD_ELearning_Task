@@ -6,6 +6,7 @@ import auth from '../components/firebase';
 import BusinessPict from '../img/b2.png';
 import { FaCheckCircle } from 'react-icons/fa';
 import Navbar from '../components/navbar';
+import Footer from '../ui/layout/footer/footer';
 
 const businessLessons = [
     { id: 1, title: 'Dasar-dasar Manajemen', type: 'video', completed: false, videoUrl: '/pd3', quizUrl: '/quiz/1' },
@@ -189,6 +190,7 @@ export default function Ebusiness() {
             )}
 
             <LoginModal isOpen={isOpen} onClose={handleCloseLogin} />
+            <Footer/>
         </Box>
     );
 }
